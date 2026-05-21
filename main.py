@@ -2,20 +2,24 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 df_vendas = pd.read_excel('vendas_ficticias.xlsx')
-#print(df_vendas.head())
 
+
+def analise_grupo(coluna, valor):
+    return df_vendas.groupby(coluna)[valor].sum().sort_values(ascending=False)
+ 
+ 
 print('\n--- Análise de Quantidades Totais ---')
-qnt_categoria = df_vendas.groupby('Categoria')['Quantidade'].sum().sort_values(ascending=False)
-qnt_cidade = df_vendas.groupby('Cidade')['Quantidade'].sum().sort_values(ascending=False)
-qnt_produtos = df_vendas.groupby('Produto')['Quantidade'].sum().sort_values(ascending=False)
+qnt_categoria = analise_grupo('Categoria', 'Quantidade')
+qnt_cidade = analise_grupo('Cidade', 'Quantidade')
+qnt_produtos = analise_grupo('Produto', 'Quantidade')
 print('\n', qnt_categoria.to_string())
 print('\n', qnt_cidade.to_string())
 print('\n', qnt_produtos.to_string())
 
 print('\n--- Análise de Vendas Totais ---')
-vendas_categoria = df_vendas.groupby('Categoria')['Valor_Total'].sum().sort_values(ascending=False) 
-vendas_cidade = df_vendas.groupby('Cidade')['Valor_Total'].sum().sort_values(ascending=False) 
-vendas_produtos = df_vendas.groupby('Produto')['Valor_Total'].sum().sort_values(ascending=False) 
+vendas_categoria = analise_grupo('Categoria', 'Valor_Total') 
+vendas_cidade = analise_grupo('Cidade', 'Valor_Total')  
+vendas_produtos = analise_grupo('Produto', 'Valor_Total')  
 print('\n', vendas_categoria.to_string())
 print('\n', vendas_cidade.to_string())
 print('\n', vendas_produtos.to_string())
