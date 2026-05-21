@@ -35,7 +35,7 @@ print('\n--- Produto Mais Lucrativo ---')
 print(f'Produto mais lucrativo: {vendas_produtos.index[0]}, R$ {vendas_produtos.iloc[0]:.2f} ')
 
 print('\n--- Ticket Médio ---')
-ticket_medio = df_vendas['Valor_Total'].sum() / df_vendas['Quantidade'].sum()
+ticket_medio = df_vendas['Valor_Total'].sum() / len(df_vendas)
 print(f'Ticket médio: R$ {ticket_medio:.2f}')
 
 print('\n--- Cidade Mais Lucrativa ---')
